@@ -133,3 +133,29 @@ func1({
 0 error(s), 1 warning(s), 100.0% typed
 ```
 
+#### Typedef record type
+
+In @typedef on record type, specifying optional parameter should be used with undefined like `(string|undefined)`.
+
+```$xslt
+/**
+ * @typedef {{
+ *  firstName: string,
+ *  lastName: (string|undefined)
+ * }}
+ */
+var People;
+
+/**
+ * @type {People}
+ */
+var obj2 = {
+  firstName: 'first_name 1',
+  familyName: 'family_name 1',
+};
+```
+
+```$xslt
+$ java -jar node_modules/google-closure-compiler/compiler.jar --js src/annotation.js --checks_only --new_type_inf
+# No warning
+```

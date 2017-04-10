@@ -1,18 +1,29 @@
-/** @const */ var MY_BEER = 'stout';
-
-MY_BEER = '1';
+// /** @const */ var MY_BEER = 'stout';
+//
+// MY_BEER = '1';
+//
+// /**
+//  * My namespace's favorite kind of beer.
+//  * @const {string}
+//  */
+// mynamespace.MY_BEER = 'stout';
+//
+// mynamespace.MY_BEER = '2';
+//
+// /** @define {boolean} */
+// var debug = true;
+//
+// debug = false; // WARNING occurs, @define force var to be const..
+// debug = 'true';
 
 /**
- * My namespace's favorite kind of beer.
- * @const {string}
+ * @param a {number}
+ * @param b {number}
+ * @returns {number}
  */
-mynamespace.MY_BEER = 'stout';
+function foo(a, b) {
+  return a - b + 1;
+}
 
-mynamespace.MY_BEER = '2';
-
-/** @define {boolean} */
-var debug = true;
-
-debug = false; // WARNING occurs, @define force var to be const..
-debug = 'true';
+foo('aaa', 'bbb');
 

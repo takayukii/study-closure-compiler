@@ -35,7 +35,9 @@ $ java -jar node_modules/google-closure-compiler/compiler.jar --js src/hello.es2
 var hello=function(a){alert("Hello, "+a)};hello("New User");
 ```
 
-### Annotating JavaScript for the Closure Compiler  
+## Annotating JavaScript for the Closure Compiler 
+
+### Simple const check
 
 [Annotating JavaScript for the Closure Compiler](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler)
 
@@ -64,4 +66,38 @@ MY_BEER = '1';
 It looks working, but `mynamespace.MY_BEER = '2';` has no alert.. and it's same to IntelliJ.
 
 ![alert](./.resources/annotation_js_-_study-closure-compiler_-____workspaces_sandbox_study-closure-compiler_.png)
+
+### Type check
+
+Option `--new_type_inf` would be needed.
+
+```$xslt
+/**
+ * @param a {number}
+ * @param b {number}
+ * @returns {number}
+ */
+function foo(a, b) {
+  return a - b + 1;
+}
+```
+
+```$xslt
+$ java -jar node_modules/google-closure-compiler/compiler.jar --js src/annotation.js --checks_only --new_type_inf
+src/annotation.js:28: WARNING - Invalid type for parameter 1 of function foo.
+Expected : number
+Found    : string
+
+foo('aaa', 'bbb');
+    ^^^^^
+
+src/annotation.js:28: WARNING - Invalid type for parameter 2 of function foo.
+Expected : number
+Found    : string
+
+foo('aaa', 'bbb');
+           ^^^^^
+
+0 error(s), 2 warning(s), 77.7% typed
+```
 

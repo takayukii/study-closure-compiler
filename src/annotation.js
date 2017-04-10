@@ -16,14 +16,26 @@
 // debug = false; // WARNING occurs, @define force var to be const..
 // debug = 'true';
 
+// /**
+//  * @param a {number}
+//  * @param b {number}
+//  * @returns {number}
+//  */
+// function foo(a, b) {
+//   return a - b + 1;
+// }
+//
+// foo('aaa', 'bbb');
+
 /**
- * @param a {number}
- * @param b {number}
- * @returns {number}
+ * @param {{firstName: string, lastName: string}} props
+ * @returns {string}
  */
-function foo(a, b) {
-  return a - b + 1;
+function func1 (props) {
+  return `${props.firstName} ${props.lastName}`;
 }
 
-foo('aaa', 'bbb');
-
+func1({
+  firstName: 'first_name 1',
+  familyName: 'family_name 1',
+});

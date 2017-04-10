@@ -71,6 +71,8 @@ It looks working, but `mynamespace.MY_BEER = '2';` has no alert.. and it's same 
 
 Option `--new_type_inf` would be needed.
 
+#### Function parameter's types
+
 ```$xslt
 /**
  * @param a {number}
@@ -99,5 +101,35 @@ foo('aaa', 'bbb');
            ^^^^^
 
 0 error(s), 2 warning(s), 77.7% typed
+```
+
+#### Function parameter's types (object type)
+
+```$xslt
+/**
+ * @param {{firstName: string, lastName: string}} props
+ * @returns {string}
+ */
+function func1 (props) {
+  return `${props.firstName} ${props.lastName}`;
+}
+
+func1({
+  firstName: 'first_name 1',
+  familyName: 'family_name 1',
+});
+```
+
+```$xslt
+$ java -jar node_modules/google-closure-compiler/compiler.jar --js src/annotation.js --checks_only --new_type_inf
+src/annotation.js:38: WARNING - Invalid type for parameter 1 of function func1.
+Expected : {firstName:string, lastName:string}
+Found    : {familyName:string, firstName:string}
+More details:
+The found type is missing property lastName
+func1({
+      ^
+
+0 error(s), 1 warning(s), 100.0% typed
 ```
 

@@ -9,3 +9,10 @@ MY_BEER = '1';
 mynamespace.MY_BEER = 'stout';
 
 mynamespace.MY_BEER = '2';
+
+/** @define {boolean} */
+var debug = true;
+
+debug = false; // WARNING occurs, @define force var to be const..
+debug = 'true';
+

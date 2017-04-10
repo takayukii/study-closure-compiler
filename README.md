@@ -16,8 +16,6 @@ $ java -jar node_modules/google-closure-compiler/compiler.jar --help
 $ java -jar node_modules/google-closure-compiler/compiler.jar --js src/hello.js --js_output_file build/hello-compiled.js
 ```
 
-## Trials
-
 ### ES2015
 
 Transpiling ES2015 to ES5
@@ -36,3 +34,34 @@ $ java -jar node_modules/google-closure-compiler/compiler.jar --js src/hello.es2
 ```$xslt
 var hello=function(a){alert("Hello, "+a)};hello("New User");
 ```
+
+### Annotating JavaScript for the Closure Compiler  
+
+[Annotating JavaScript for the Closure Compiler](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler)
+
+```$xslt
+/** @const */ var MY_BEER = 'stout';
+MY_BEER = '1';
+
+/**
+ * My namespace's favorite kind of beer.
+ * @const {string}
+ */
+mynamespace.MY_BEER = 'stout';
+mynamespace.MY_BEER = '2';
+```
+
+```$xslt
+$ java -jar node_modules/google-closure-compiler/compiler.jar --js src/annotation.js --checks_only
+src/annotation.js:3: WARNING - constant MY_BEER assigned a value more than once.
+Original definition at src/annotation.js:1
+MY_BEER = '1';
+^^^^^^^^^^^^^
+
+0 error(s), 1 warning(s)
+```
+
+It looks working, but `mynamespace.MY_BEER = '2';` has no alert.. and it's same to IntelliJ.
+
+![alert](./.resources/annotation_js_-_study-closure-compiler_-____workspaces_sandbox_study-closure-compiler_.png)
+

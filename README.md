@@ -159,3 +159,41 @@ var obj2 = {
 $ java -jar node_modules/google-closure-compiler/compiler.jar --js src/annotation.js --checks_only --new_type_inf
 # No warning
 ```
+
+#### Typedef in separated file
+
+```$xslt
+/**
+ * @typedef {{
+ *  firstName: string,
+ *  lastName: (string|undefined)
+ * }}
+ */
+export var People;
+```
+
+```$xslt
+import {People} from './types';
+
+/**
+ * @type {People}
+ */
+var obj2 = {
+  familyName: 'family_name 1',
+};
+```
+
+NOTE: Include types.js as --js option. 
+
+```$xslt
+$ java -jar node_modules/google-closure-compiler/compiler.jar --js src/types.js --js src/annotation.js --checks_only --new_type_inf 
+src/annotation.js:75: WARNING - The right side in the assignment is not a subtype of the left side.
+Expected : {firstName:string, lastName:string|undefined=}
+Found    : {familyName:string}
+More details:
+The found type is missing property firstName
+var obj2 = {
+           ^
+
+0 error(s), 1 warning(s), 100.0% typed
+```

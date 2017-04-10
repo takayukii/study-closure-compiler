@@ -48,21 +48,30 @@
 //   familyName: 'family_name 1',
 // };
 
-/**
- * @typedef {{
- *  firstName: string,
- *  lastName: (string|undefined)
- * }}
- */
-var People;
+// /**
+//  * @typedef {{
+//  *  firstName: string,
+//  *  lastName: (string|undefined)
+//  * }}
+//  */
+// var People;
+//
+// /**
+//  * @type {People}
+//  */
+// var obj2 = {
+//   firstName: 'first_name 1',
+//   familyName: 'family_name 1',
+// };
+//
+// // https://github.com/google/closure-compiler/issues/126
+// // (string|undefined) means optional in typedef
+
+import {People} from './types';
 
 /**
  * @type {People}
  */
 var obj2 = {
-  firstName: 'first_name 1',
   familyName: 'family_name 1',
 };
-
-// https://github.com/google/closure-compiler/issues/126
-// (string|undefined) means optional in typedef
